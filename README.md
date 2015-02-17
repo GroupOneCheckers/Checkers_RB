@@ -23,14 +23,10 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 
 * ...
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
-
 API Calls
 
-Status: 200 OK
-post [heroku.com]/users
+<code>Status: 200 OK
+post [heroku.com]/users</code>
 
 ```json
 "user": { 
