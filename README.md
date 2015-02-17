@@ -37,9 +37,9 @@ post [heroku.com]/users</code>
 ```
 
 creates a new user. returns an TokenAuth
-
-Status: 422 unprocessable_entity
-
+<pre>
+<code> Status: 422 unprocessable_entity </code>
+</pre>
 ```json
 "errors": {
 	"message": "authentication failed"
