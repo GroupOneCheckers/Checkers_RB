@@ -34,9 +34,9 @@ post [heroku.com]/users
 
 ```json
 "user": { 
-				"username": "Spencer", 
-				"email": "spencer@gmail.com" 
-				"password": "SpencersKitty"
+	"username": "Spencer", 
+	"email": "spencer@gmail.com" 
+	"password": "SpencersKitty"
 }
 ```
 
