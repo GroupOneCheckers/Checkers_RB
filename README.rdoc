@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
+ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 * System dependencies
 
 * Configuration
@@ -31,22 +31,22 @@ API Calls
 
 Status: 200 OK
 post [heroku.com]/users
-```
 
+<tt>
 "user": {
 "username": "Spencer",
 "email": "spencer@gmail.com"
 "password": "SpencersKitty" 
 }
+</tt>
 
-```
 creates a new user. returns an TokenAuth
 
 Status: 
-
+<tt>
 "errors": {
 "message": "authentication failed"
 }
-
+</tt>
 Here goes your json object definition
 
