@@ -42,7 +42,7 @@ post [heroku.com]/users
 
 creates a new user. returns an TokenAuth
 
-Status: 
+Status: 422 unprocessable_entity
 
 ```json
 "errors": {
