@@ -45,9 +45,11 @@ creates a new user. returns an TokenAuth
 Status: 
 
 ```json
+
 "errors": {
   "message": "authentication failed"
 }
+
 ```
 
 Here goes your json object definition
