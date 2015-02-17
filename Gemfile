@@ -39,6 +39,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'faker'
+  gem 'devise'
+  gem 'pry'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -50,7 +52,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'rack_cors' # Frontend Support
+  gem 'rack-cors' # Frontend Support
   gem 'pg'
   gem 'rails_12factor'
 end
