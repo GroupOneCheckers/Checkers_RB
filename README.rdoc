@@ -26,3 +26,22 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+API Calls
+
+Status: 200 OK
+post [heroku.com]/users
+
+"user": {
+        "username": "Spencer",
+		    "email": "spencer@gmail.com",
+		    "password": "SpencersKitty" 
+}
+
+creates a new user. returns an TokenAuth
+
+Status: 
+"errors": {
+	"message": "authentication failed"
+}
+
