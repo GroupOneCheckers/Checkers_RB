@@ -24,10 +24,10 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 * ...
 
 API Calls
-
+<pre>
 <code>Status: 200 OK
 post [heroku.com]/users</code>
-
+</pre>
 ```json
 "user": { 
 	"username": "Spencer", 
