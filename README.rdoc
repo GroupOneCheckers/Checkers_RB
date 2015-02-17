@@ -31,19 +31,22 @@ API Calls
 
 Status: 200 OK
 post [heroku.com]/users
-``` 
+```
+
 "user": {
 "username": "Spencer",
 "email": "spencer@gmail.com"
 "password": "SpencersKitty" 
 }
+
 ```
 creates a new user. returns an TokenAuth
 
 Status: 
-```
+
 "errors": {
 "message": "authentication failed"
 }
-```
+
+Here goes your json object definition
 
