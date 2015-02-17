@@ -39,6 +39,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'faker'
+  gem 'devise'
+  gem 'pry'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -46,6 +48,13 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring'  
 end
 
+group :production do
+  gem 'rack-cors' # Frontend Support
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
+ruby '2.1.5'
