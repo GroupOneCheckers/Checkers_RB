@@ -35,7 +35,7 @@ post [heroku.com]/users
 ```json
 "user": { 
 	"username": "Spencer", 
-	"email": "spencer@gmail.com" 
+	"email": "spencer@gmail.com",
 	"password": "SpencersKitty"
 }
 ```
@@ -46,7 +46,7 @@ Status:
 
 ```json
 "errors": {
-  "message": "authentication failed"
+	"message": "authentication failed"
 }
 ```
 
