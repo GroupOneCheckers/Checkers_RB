@@ -2,8 +2,8 @@ class RegistrationsController < Devise::RegistrationsController
 def create
   @user = User.new(user_params)
   if @user.save
-    binding.pry
-    render json: { user: @user, username: @user.username }, status: :created
+    #binding.pry
+    render json: { user: @user }, status: :created
   else
     render json: { :messages => @user.errors.full_messages },
       status: :unprocessable_entity
