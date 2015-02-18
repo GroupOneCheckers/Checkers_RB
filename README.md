@@ -22,21 +22,14 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 
 * Deployment instructions
 
-<li> endpoint: 
-	<strong>
-		https://ninja-checkers.herokuapp.com 
-	</strong>
-</li>
-
-<span>API Calls</span>
+<p>API endpoint: <strong> https://ninja-checkers.herokuapp.com </strong></p>
 
 <h2> Create a User </h2>
 
 <h5>Request</h5>
-<pre>
-<code>Status: 200 OK
-POST /users</code>
-</pre>
+
+`POST /users`
+
 ```json
 "user": { 
 	"username": "Spencer", 
@@ -46,6 +39,9 @@ POST /users</code>
 ```
 <h5>response</h5>
 
+`Status: 200 OK`
+
+creates a new user. returns an authentication token.
 ```json
 {
 "user": {
@@ -55,11 +51,9 @@ POST /users</code>
 }
 ```
 
+error examples:
+`Status: 422 unprocessable_entity`
 
-creates a new user. returns an authentication token.
-<pre>
-<code> Status: 422 unprocessable_entity </code>
-</pre>
 ```json
 "errors": {
 	"message": "authentication failed"
@@ -73,27 +67,26 @@ creates a new user. returns an authentication token.
 ```
 
 
-
-
 <h2>User Sign in</h2>
 
 <h5>Request</h5>
 
-<pre>
-<code>Status: 200 OK
-POST /users/sign_in</code>
-</pre>
+
+`POST /users/sign_in`
+
 ```json
 "user": { 
 	"email": "spencer@gmail.com",
 	"password": "SpencersKitty",
-	"token_auth: "aksfakBJABSFkjbasf"
 }
 ```
 
 allows a user to sign in.
 
 <h5>Response</h5>
+
+`Status: 200 OK`
+
 ```json
 {
 "user": {
@@ -101,11 +94,11 @@ allows a user to sign in.
 	"authentication_token": "MMrgfMFPz-S14qomLdyX"
 	}
 }
-```json
+```
 
-<pre>
-<code> 401 unauthorized</code>
-</pre>
+example errors:
+`Status: 401 unauthorized`
+
 ```json
 "errors": {
 	"message": "authentication failed"
@@ -115,11 +108,8 @@ allows a user to sign in.
 
 <h2>User Sign Out</h2>
 
-<pre>
-<code>Status: 200 OK
-DELETE /users/sign_out</code>
-</pre>
+`DELETE /users/sign_out`
 
-Signs a user out. #####sign out is not returning any response at the moment####
+Signs a user out. ##### sign out is not returning any response at the moment ####
 
 
