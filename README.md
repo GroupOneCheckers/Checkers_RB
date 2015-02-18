@@ -46,6 +46,7 @@ creates a new user. returns an authentication token.
 {
 "user": {
 	"email": "spencer@aol.com",
+	"username": "Spencer",
 	"authentication_token": "bEazx9CNyTh-3URaMge2"
 	}
 }

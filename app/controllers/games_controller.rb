@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :set_game, only: [:show]
 
+
   def show
     render json: { :game => @game }, status: :ok
   end
@@ -10,11 +11,8 @@ class GamesController < ApplicationController
     
   end
 
-  def new
-    @game.new()
-  end
-
   def create
+    binding.pry
     @game = Game.new(users: [current_user])
     if @game.save
       render json: {game: @game}, status: :created
@@ -22,10 +20,6 @@ class GamesController < ApplicationController
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
   end
-
-
-
-
 
   private
 
