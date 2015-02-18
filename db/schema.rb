@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218003443) do
+ActiveRecord::Schema.define(version: 20150218044316) do
+
+  create_table "games", force: :cascade do |t|
+    t.integer "players_count"
+    t.integer "winner_id"
+    t.integer "turn_count",    default: 0
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "country"
+    t.string   "bitcoin_address"
+    t.string   "card_type"
+    t.datetime "expirey_date"
+    t.string   "card_number_last_four"
+    t.string   "favorite_color"
+    t.string   "blog"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,6 +52,12 @@ ActiveRecord::Schema.define(version: 20150218003443) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "authentication_token"
+    t.integer  "wins",                   default: 0
+    t.integer  "losses",                 default: 0
+    t.integer  "forfeits",               default: 0
+    t.integer  "level",                  default: 1
+    t.integer  "experience",             default: 0
+    t.string   "division"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"

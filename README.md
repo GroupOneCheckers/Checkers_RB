@@ -20,6 +20,8 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 API Calls
 
 <h2> Create a User </h2>
+
+<h5>Request</h5>
 <pre>
 <code>Status: 200 OK
 POST [heroku.com]/users</code>
@@ -31,6 +33,17 @@ POST [heroku.com]/users</code>
 	"password": "SpencersKitty"
 }
 ```
+<h5>response</h5>
+
+```json
+{
+"user": {
+	"email": "brit@gmail.com",
+	"authentication_token": "MMrgfMFPz-S14qomLdyX"
+	}
+}
+```
+
 
 creates a new user. returns an TokenAuth
 <pre>
@@ -40,12 +53,22 @@ creates a new user. returns an TokenAuth
 "errors": {
 	"message": "authentication failed"
 }
+
+{
+"messages": [
+	"Password is too short (minimum is 8 characters)"
+]
+}
 ```
 
 
 
 
+
+
 <h2>User Sign in</h2>
+
+<h5>Request</h5>
 
 <pre>
 <code>Status: 200 OK
@@ -61,6 +84,15 @@ POST [heroku.com]/users/sign_in</code>
 
 allows a user to sign in.
 
+<h5>Response</h5>
+```json
+{
+"user": {
+	"email": "brit@gmail.com",
+	"authentication_token": "MMrgfMFPz-S14qomLdyX"
+	}
+}
+```json
 
 <pre>
 <code> 401 unauthorized</code>
@@ -79,6 +111,6 @@ allows a user to sign in.
 DELETE [heroku.com]/users/sign_out</code>
 </pre>
 
-Signs a user out.
+Signs a user out. #####sign out is not returning any response at the moment####
 
 
