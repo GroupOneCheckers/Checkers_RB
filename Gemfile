@@ -24,7 +24,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
-gem 'faker'
+gem 'pry-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -36,10 +37,11 @@ gem 'faker'
 
 group :development, :test do
   gem 'seed_dump'
-  gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
+  gem 'faker'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
