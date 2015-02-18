@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   before_save :ensure_authentication_token
+  has_one :user_profile
+  has_many :players
+  has_many :games, through: :players
 
   def ensure_authentication_token
     if authentication_token.blank?
@@ -23,3 +26,6 @@ class User < ActiveRecord::Base
     end
   end
 end
+
+
+
