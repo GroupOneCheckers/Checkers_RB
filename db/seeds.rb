@@ -54,6 +54,30 @@ end
 
 
 
+User.create(username: 'EliasMaus' , password: 'password', email: 'EliasMaus@aol.com')
+User.create(username: 'MLamson' , password: 'password', email: 'MLamson@aol.com')
+User.create(username: 'mollietaylor' , password: 'password', email: 'mollietaylor@aol.com')
+User.create(username: 'nickray22' , password: 'password', email: 'nickray22@aol.com')
+User.create(username: 'NRHCowarT' , password: 'password', email: 'NRHCowarT@aol.com')
+User.create(username: 'spencerwyckoff' , password: 'password', email: 'spencerwyckoff@aol.com')
+User.create(username: 'Will16' , password: 'password', email: 'Will16@aol.com')
+User.create(username: 'williammasonjones' , password: 'password', email: 'williammasonjones@aol.com')
+User.create(username: 'brossetti1' , password: 'password', email: 'brossetti17@aol.com')
+User.create(username: 'redline6561' , password: 'password', email: 'redline6561@aol.com')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
