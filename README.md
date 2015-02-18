@@ -17,6 +17,8 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 
 * Deployment instructions
 
+<h1> endpoint: ninja-checkers.herokuapp.com </h1>
+
 API Calls
 
 <h2> Create a User </h2>
@@ -24,7 +26,7 @@ API Calls
 <h5>Request</h5>
 <pre>
 <code>Status: 200 OK
-POST [heroku.com]/users</code>
+POST /users</code>
 </pre>
 ```json
 "user": { 
@@ -39,7 +41,7 @@ POST [heroku.com]/users</code>
 {
 "user": {
 	"email": "brit@gmail.com",
-	"authentication_token": "MMrgfMFPz-S14qomLdyX"
+	"authentication_token": "bEazx9CNyTh-3URaMge2"
 	}
 }
 ```
@@ -64,15 +66,13 @@ creates a new user. returns an TokenAuth
 
 
 
-
-
 <h2>User Sign in</h2>
 
 <h5>Request</h5>
 
 <pre>
 <code>Status: 200 OK
-POST [heroku.com]/users/sign_in</code>
+POST /users/sign_in</code>
 </pre>
 ```json
 "user": { 
@@ -108,7 +108,7 @@ allows a user to sign in.
 
 <pre>
 <code>Status: 200 OK
-DELETE [heroku.com]/users/sign_out</code>
+DELETE /users/sign_out</code>
 </pre>
 
 Signs a user out. #####sign out is not returning any response at the moment####
