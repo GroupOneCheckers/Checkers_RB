@@ -1,34 +1,33 @@
 class Game < ActiveRecord::Base
-  serialize :board
-
   has_many :players
   has_many :users, through: :players
 
   validates_length_of :users, maximum: 2, message: "you can only have two players."
 
-  def as_json(opts={})
-    super(:only => [:board, :turn_count])
+    def as_json(opts={})
+      super(:only => [:board, :turn_count])
+    end
+
+  INITIAL_BOARD = [[0, 1, 0 ,1, 0, 1, 0, 1],
+                   [1, 0, 1, 0, 1, 0, 1, 0],
+                   [0, 1, 0, 1, 0, 1, 0, 1],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [2, 0, 2, 0, 2, 0, 2, 0],
+                   [0, 2, 0, 2, 0, 2, 0, 2],
+                   [2, 0, 2, 0, 2, 0, 2, 0]]
+
+  serialize :board
+
+  def self.waiting
+    Game.where(:players_count => 1)
+  end
+
+  def self.active
+    Game.where(:finished => false)
+  end
+
+  def new_board!
+    self.update_attribute :board, INITIAL_BOARD
   end
 end
-
-
-# board_hash = {1=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               2=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               3=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               4=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               5=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               6=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               7=>[1, 1, 0, 0, 0, 0, 2, 2],
-#               8=>[1, 1, 0, 0, 0, 0, 2, 2]}
-
-#  board_array = [[1, 1, 1, 1, 1, 1, 1, 1],
-#                 [1, 1, 1, 1, 1, 1, 1, 1],
-#                 [0, 0, 0, 0, 0, 0, 0, 0],
-#                 [0, 0, 0, 0, 0, 0, 0, 0],
-#                 [0, 0, 0, 0, 0, 0, 0, 0],
-#                 [0, 0, 0, 0, 0, 0, 0, 0],
-#                 [2, 2, 2, 2, 2, 2, 2, 2],
-#                 [2, 2, 2, 2, 2, 2, 2, 2]]
-
-
-#
