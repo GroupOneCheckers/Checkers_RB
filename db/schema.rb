@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218180647) do
+ActiveRecord::Schema.define(version: 20150218193253) do
 
   create_table "games", force: :cascade do |t|
     t.integer "players_count"
     t.integer "winner_id"
-    t.integer "turn_count",    default: 0
     t.string  "board"
+    t.boolean "finished",      default: false
   end
 
   create_table "players", force: :cascade do |t|
