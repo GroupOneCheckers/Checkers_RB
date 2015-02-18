@@ -7,6 +7,7 @@ class GamesController < ApplicationController
   end
 
   def join
+    
   end
 
   def new
@@ -18,7 +19,7 @@ class GamesController < ApplicationController
     if @game.save
       render json: {game: @game}, status: :created
     else
-      render json: {messages: @gmae.errors.full_messages}, status: :unprocessable_entity
+      render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
