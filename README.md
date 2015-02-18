@@ -24,7 +24,7 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 
 <li> endpoint: 
 	<strong>
-		https:://ninja-checkers.herokuapp.com 
+		https://ninja-checkers.herokuapp.com 
 	</strong>
 </li>
 
