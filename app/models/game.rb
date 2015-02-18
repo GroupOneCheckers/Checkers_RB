@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
   validates_length_of :users, maximum: 2, message: "you can only have two players."
 
     def as_json(opts={})
-      super(:only => [:board, :turn_count])
+      super(:only => [:board])
     end
 
   INITIAL_BOARD = [[0, 1, 0 ,1, 0, 1, 0, 1],

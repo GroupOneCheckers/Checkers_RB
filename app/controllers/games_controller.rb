@@ -7,8 +7,15 @@ class GamesController < ApplicationController
   end
 
   def join
-    
+    @waiting = Game.waiting.first
+    if @waiting
+      @game = @waiting.users << current_user
+      render json: { :game => @game}, status: :ok
+    else
+      render json: { messages: @game.errors.full_messages}, status: :unprocessable_entity
+    end
   end
+
 
   def new
     @game.new()
