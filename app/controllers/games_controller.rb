@@ -8,9 +8,10 @@ class GamesController < ApplicationController
   end
 
   def join
-    @waiting = Game.waiting.first
-    if @waiting
-      @game = @waiting.users << current_user
+    binding.pry
+    @game = Game.find(params[:id])
+    @game.users << current_user
+    if @game.save
       render json: { :game => @game}, status: :ok
     else
       render json: { messages: @game.errors.full_messages}, status: :unprocessable_entity
@@ -18,7 +19,6 @@ class GamesController < ApplicationController
   end
 
   def create
-    binding.pry
     @game = Game.new(users: [current_user])
     if @game.save
       render json: {game: @game}, status: :created
