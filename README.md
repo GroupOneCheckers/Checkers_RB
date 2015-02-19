@@ -31,15 +31,15 @@ ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
 `POST /users`
 
 ```json
-"user": { 
-	"username": "Spencer", 
+"user": {
+	"username": "Spencer",
 	"email": "spencer@aol.com",
 	"password": "SpencersKitty"
 }
 ```
 <h5>response</h5>
 
-`Status: 200 OK`
+`Status: 201 Created`
 
 creates a new user. returns an authentication token.
 ```json
@@ -76,7 +76,7 @@ error examples:
 `POST /users/sign_in`
 
 ```json
-"user": { 
+"user": {
 	"email": "spencer@gmail.com",
 	"password": "SpencersKitty",
 }
@@ -112,5 +112,81 @@ example errors:
 `DELETE /users/sign_out`
 
 Signs a user out. ##### sign out is not returning any response at the moment ####
+
+
+<h2>Create a Game</h2>
+
+<h5>Request</h5>
+
+`POST /games`
+
+```json
+"user": {
+	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
+}
+```
+
+creates a new game. Returns the board.
+
+<h5>Response</h5>
+
+`Status: 201 Created`
+
+```json
+{
+"game": {
+"board":
+				[[0, 1, 0, 1, 0, 1, 0, 1],
+				  [1, 0, 1, 0, 1, 0, 1, 0],
+				  [0, 1, 0, 1, 0, 1, 0, 1],
+				  [0, 0, 0, 0, 0, 0, 0, 0],
+				  [0, 0, 0, 0, 0, 0, 0, 0],
+				  [2, 0, 2, 0, 2, 0, 2, 0],
+				  [0, 2, 0, 2, 0, 2, 0, 2],
+				  [2, 0, 2, 0, 2, 0, 2, 0]]
+				}
+}
+
+
+<h2>Join a Game</h2>
+
+<h5>Request</h5>
+
+`POST /games/id`
+
+```json
+"user": {
+	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
+}
+```
+
+allows a user to join a game in waiting. Returns the board.
+
+<h5>Response</h5>
+
+`Status: 200 OK`
+
+```json
+{
+"game": {
+"board":
+				[[0, 1, 0, 1, 0, 1, 0, 1],
+				  [1, 0, 1, 0, 1, 0, 1, 0],
+				  [0, 1, 0, 1, 0, 1, 0, 1],
+				  [0, 0, 0, 0, 0, 0, 0, 0],
+				  [0, 0, 0, 0, 0, 0, 0, 0],
+				  [2, 0, 2, 0, 2, 0, 2, 0],
+				  [0, 2, 0, 2, 0, 2, 0, 2],
+				  [2, 0, 2, 0, 2, 0, 2, 0]]
+				}
+}
+
+example errors:
+`Status: 422 Unprocessable Entity`
+
+
+
+
+
 
 
