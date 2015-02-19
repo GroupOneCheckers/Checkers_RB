@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'games/create'
 
+  get 'games/leaderboard'
+
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :sessions => "sessions" }
 
