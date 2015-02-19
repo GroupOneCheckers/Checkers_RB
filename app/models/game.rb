@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
   has_many :players
   has_many :users, through: :players
+
   after_validation :new_board!
 
   validates_length_of :users, maximum: 2, message: "you can only have two players."
@@ -31,4 +32,6 @@ class Game < ActiveRecord::Base
   def new_board!
     self.update_attribute :board, INITIAL_BOARD
   end
+
+
 end

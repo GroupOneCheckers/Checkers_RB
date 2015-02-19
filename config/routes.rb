@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  get 'games/new'
-
-  get 'games/create'
-
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :sessions => "sessions" }
 
   post '/games/:id', to: 'games#join', as: :join_game
+  post '/users/:id/games', to: 'games#challange', as: :challange_player
   resources :games
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
