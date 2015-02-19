@@ -8,7 +8,6 @@ class GamesController < ApplicationController
   end
 
   def join
-    binding.pry
     @game = Game.find(params[:id])
     @game.users << current_user
     if @game.save
