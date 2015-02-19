@@ -132,7 +132,7 @@ creates a new game. Returns the board.
 
 `Status: 201 Created`
 
-```json
+```
 {
 "game": {
 "board":
