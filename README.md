@@ -146,7 +146,7 @@ creates a new game. Returns the board.
 				  [2, 0, 2, 0, 2, 0, 2, 0]]
 				}
 }
-
+```
 
 <h2>Join a Game</h2>
 
@@ -180,6 +180,7 @@ allows a user to join a game in waiting. Returns the board.
 				  [2, 0, 2, 0, 2, 0, 2, 0]]
 				}
 }
+```
 
 example errors:
 `Status: 422 Unprocessable Entity`
