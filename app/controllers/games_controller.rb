@@ -1,13 +1,11 @@
 class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
-  before_action :set_game, only: [:show, :join, :update]
+  before_action :set_game, only: [:join, :update]
 
 
   def update
-    binding.pry
     board_before_move = @game.board.map(&:deep_dup)
     @game.pick_move(current_user, token_start_params, token_end_params)
-    binding.pry
     if @game.board != board_before_move
       render json: { :game => @game }, status: :ok
     else
@@ -34,7 +32,6 @@ class GamesController < ApplicationController
   end
 
   def challenge
-    binding.pry
     @player1 = User.find_by_authentication_token(player1_challenge_params)
     @player2 = User.find_by_authentication_token(player2_challange_params)
     @game = Game.new(users: [@player1, @player2])
@@ -44,6 +41,8 @@ class GamesController < ApplicationController
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
   end
+
+
   private
 
   def set_game
@@ -66,6 +65,15 @@ class GamesController < ApplicationController
   def token_end_params
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
+  end
+
+  def leaderboard
+    @users = User.all.order('users.wins DESC').first(25)
+    if @users
+      render json: { users: @users }, status: :created
+    else
+      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
 end

@@ -37,7 +37,6 @@ class Game < ActiveRecord::Base
   def player2; self.users[1]; end
 
   def pick_move(user, token_start, token_end)
-    binding.pry
     x1, y1 = token_start
     if player1 == user && self.board[x1][y1] == 1
       x2 = xBottomCheck(token_start, token_end)

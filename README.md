@@ -229,6 +229,24 @@ example errors:
 `Status: 422 Unprocessable Entity`
 
 
+<h2>Leaderboard</h2>
+
+<h5>Request</h5>
+
+`GET /games/leaderboard`
+
+```json
+"users": {
+  "email": "isac@abshire.org",
+  "username": "rickey_batz",
+  "authentication_token": "YBbk7q4FRXztrskezRzi",
+  "wins": 99,
+  "losses": 71,
+  "forfeits": 13
+}
+```
+
+
 <h2>pick a move on the board</h2>
 
 <h5>Request</h5>
