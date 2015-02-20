@@ -241,7 +241,8 @@ example errors:
   }
 ```
 
-`RESPONSE:`
+<h5>Response</h5>
+
 ```json
 "users": {
   "email": "isac@abshire.org",
