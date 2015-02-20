@@ -51,7 +51,6 @@ class GamesController < ApplicationController
     end
   end
 
-
   private
 
   def set_game
@@ -67,5 +66,4 @@ class GamesController < ApplicationController
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
   end
-
 end
