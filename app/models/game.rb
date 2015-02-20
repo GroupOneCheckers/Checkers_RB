@@ -33,5 +33,4 @@ class Game < ActiveRecord::Base
     self.update_attribute :board, INITIAL_BOARD
   end
 
-
 end
