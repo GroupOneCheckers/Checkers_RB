@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   has_many :players
   has_many :users, through: :players
 
-  #after_create :new_board!
+  after_create :new_board!
 
   validates_length_of :users, maximum: 2, message: "you can only have two players."
 
