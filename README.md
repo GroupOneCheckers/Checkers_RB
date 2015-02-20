@@ -235,10 +235,13 @@ example errors:
 
 `GET /games/leaderboard`
 
+```json
 {
   "authentication_token": "YBbk7q4FRXztrskezRzi"
   }
+```
 
+`RESPONSE:`
 ```json
 "users": {
   "email": "isac@abshire.org",
