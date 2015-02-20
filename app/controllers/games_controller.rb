@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     end
   end
 
-  def challange
+  def challenge
     @user = User.find(params[:id])
     @game = Game.new(users: [current_user, @user])
     if @game.save
@@ -35,8 +35,17 @@ class GamesController < ApplicationController
     end
   end
 
-  private
+  def leaderboard
+    @users = User.all.order('users.wins DESC').first(25)
+    if @users
+      render json: { users: @users }, status: :created
+    else
+      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
+  private
+  
   def user_params
     params.require(:user).permit(:email, :password, :username)
   end
@@ -44,5 +53,4 @@ class GamesController < ApplicationController
   def set_game
     @game = Game.find(params[:id])
   end
-
 end
