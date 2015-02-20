@@ -234,6 +234,8 @@ example errors:
 
 <h5>Response</h5>
 
+`Status: 200 OK`
+
 ```json
 "users": {
   "email": "isac@abshire.org",
