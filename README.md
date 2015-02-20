@@ -121,7 +121,7 @@ Signs a user out. ##### sign out is not returning any response at the moment ###
 `POST /games`
 
 ```json
-"user": {
+{
 	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
 }
 ```
@@ -157,7 +157,7 @@ creates a new game. Returns the board.
 `POST /games/id`
 
 ```json
-"user": {
+{
 	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
 }
 ```
@@ -189,19 +189,19 @@ allows a user to join a game in waiting. Returns the board.
 example errors:
 `Status: 422 Unprocessable Entity`
 
-<h2>Challange a Player<strong>****challenge is not working at the moment****</strong></h2> 
+<h2>Challange a Player</h2> 
 
 <h5>Request</h5>
 
 `POST /users/:id/games`
 
 ```json
-"user": {
-	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
+{
+"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
 }
 ```
 
-allows a user to challange another user. Returns the board.
+`:id` is the user_id of the player being challanged, you must send the `authentication_token` of the user that is challeging another user. This allows a user to challange another user. Returns the board.
 
 <h5>Response</h5>
 
@@ -254,8 +254,8 @@ example errors:
 `PATCH /games/:id`
 
 ```json
-"user": {
-	"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
+"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
+"pick": {
 	"token_start": "[5,2]"
 	"token_end": "[4,1]"
 }
@@ -276,8 +276,8 @@ allows a player to pick a move on the board, returns board with updated pieces i
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
                 [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 1, 0, 0, 0, 0, 0, 0], ## move to [4,1]
-                [1, 0, 0, 0, 1, 0, 1, 0],
+                [0, <strong>1</strong>, 0, 0, 0, 0, 0, 0],
+                [1, 0, <strong>0</strong>, 0, 1, 0, 1, 0],
                 [0, 1, 0, 1, 0, 1, 0, 1],
                 [1, 0, 1, 0, 1, 0, 1, 0]
 			 ]
