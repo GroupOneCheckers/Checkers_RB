@@ -3,24 +3,7 @@
 ![ninja-dojocat](https://camo.githubusercontent.com/20232135c459ea65f3b35e4c779725bc789b4c9c/687474703a2f2f6f63746f6465782e6769746875622e636f6d2f696d616765732f646f6a6f6361742e6a7067)
 
 
-Things you may want to cover:
-
-* Ruby version
-ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+<p>Ruby Version 2.1.5p273 (2014-11-13 revision 48405) [x86_64-darwin14.0]</p>
 
 <p>API endpoint: <strong> https://ninja-checkers.herokuapp.com </strong></p>
 
@@ -266,7 +249,7 @@ example errors:
 ```json
 "authentication_token": "CjsyXUPfxM3Ta3qtBBxd"
 "pick": {
-	"token_start": "[5,2]"
+	"token_start": "[5,2]",
 	"token_end": "[4,1]"
 }
 ```
@@ -280,14 +263,15 @@ allows a player to pick a move on the board, returns board with updated pieces i
 ```json
 {
 "game": {
+	"response": "valid",
 	"id": 66,
 	"board": [ 
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
                 [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, <strong>1</strong>, 0, 0, 0, 0, 0, 0],
-                [1, 0, <strong>0</strong>, 0, 1, 0, 1, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0],
+                [1, 0, 0, 0, 1, 0, 1, 0],
                 [0, 1, 0, 1, 0, 1, 0, 1],
                 [1, 0, 1, 0, 1, 0, 1, 0]
 			 ]
