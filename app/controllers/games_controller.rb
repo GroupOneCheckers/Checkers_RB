@@ -45,7 +45,7 @@ class GamesController < ApplicationController
   def leaderboard
     @users = User.all.order('users.wins DESC').first(25)
     if @users
-      render json: { users: @users }, status: :created
+      render "games/leaderboard.json.jbuilder", status: :created
     else
       render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
     end
