@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                                       :sessions => "sessions" }
 
   post '/games/:id', to: 'games#join', as: :join_game
-  post '/games/challenge', to: 'games#challenge', as: :challenge_player
+  post 'users/:id/games', to: 'games#challenge', as: :challenge_player
   get 'games/leaderboard', to: 'games#leaderboard', as: :leaderboard
   resources :games
   # The priority is based upon order of creation: first created -> highest priority.

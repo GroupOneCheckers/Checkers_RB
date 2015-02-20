@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   def update
     board_before_move = @game.board.map(&:deep_dup)
     @game.pick_move(current_user, token_start_params, token_end_params)
+    binding.pry
     if @game.board != board_before_move
       render json: { :game => @game }, status: :ok
     else
@@ -32,13 +33,21 @@ class GamesController < ApplicationController
   end
 
   def challenge
-    @player1 = User.find_by_authentication_token(player1_challenge_params)
-    @player2 = User.find_by_authentication_token(player2_challange_params)
-    @game = Game.new(users: [@player1, @player2])
+    @player2 = User.find(params[:id])
+    @game = Game.new(users: [current_user, @player2])
     if @game.save
       render json: {game: @game}, status: :created
     else
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def leaderboard
+    @users = User.all.order('users.wins DESC').first(25)
+    if @users
+      render json: { users: @users }, status: :created
+    else
+      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -49,14 +58,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def player1_challenge_params
-    params.require(:challenge).permit(:authentication_token_p1)
-  end
-
-  def player2_challange_params
-    params.require(:challenge).permit(:authentication_token_p2)
-  end
-
   def token_start_params
     token_start = params.require(:pick).permit(:token_start)
     JSON.parse(token_start['token_start'])
@@ -65,15 +66,6 @@ class GamesController < ApplicationController
   def token_end_params
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
-  end
-
-  def leaderboard
-    @users = User.all.order('users.wins DESC').first(25)
-    if @users
-      render json: { users: @users }, status: :created
-    else
-      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
-    end
   end
 
 end
