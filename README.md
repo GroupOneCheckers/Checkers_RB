@@ -243,7 +243,7 @@ example errors:
 
 <h5>Response</h5>
 
-`Status: 200 OK`
+`Status: 201 CREATED`
 
 ```json
 "users": {
