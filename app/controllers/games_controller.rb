@@ -36,10 +36,9 @@ class GamesController < ApplicationController
   end
 
   def leaderboard
-    @users = User.select(User).order('users.wins DESC')
-    binding.pry
+    @users = User.all.order('users.wins DESC').first(25)
     if @users
-      render json: { :users => @users }, status: :created
+      render json: { users: @users }, status: :created
     else
       render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
     end
