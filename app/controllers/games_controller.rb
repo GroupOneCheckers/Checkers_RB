@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   def join
     @game.users << current_user
     if @game.save
-      render json: { :game => @game}, status: :ok
+      render "games/join.json.jbuilder", status: :ok
     else
       render json: { messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
