@@ -42,6 +42,14 @@ class GamesController < ApplicationController
     end
   end
 
+  def leaderboard
+    @users = User.all.order('users.wins DESC').first(25)
+    if @users
+      render json: { users: @users }, status: :created
+    else
+      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -66,14 +74,4 @@ class GamesController < ApplicationController
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
   end
-
-  def leaderboard
-    @users = User.all.order('users.wins DESC').first(25)
-    if @users
-      render json: { users: @users }, status: :created
-    else
-      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
 end
