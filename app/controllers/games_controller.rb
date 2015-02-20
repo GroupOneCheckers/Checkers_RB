@@ -26,7 +26,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(users: [current_user])
     if @game.save
-      render json: {game: @game}, status: :created
+      render "games/create.json.jbuilder", status: :created
     else
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
