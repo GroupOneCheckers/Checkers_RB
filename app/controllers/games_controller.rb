@@ -8,9 +8,9 @@ class GamesController < ApplicationController
     @game.pick_move(current_user, token_start_params, token_end_params)
     binding.pry
     if @game.board != board_before_move
-      render json: { :game => @game }, status: :ok
+      render json: { :valid_move => 1 }, status: :ok
     else
-      render json: { messages: @game.move_error}, status: :not_acceptable
+      render json: { :valid_move => 0 }, status: :not_acceptable
     end
   end
 
