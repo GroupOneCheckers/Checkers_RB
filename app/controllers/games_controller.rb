@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   def join
     @game.users << current_user
     if @game.save
-      render json: { :game => @game}, status: :ok
+      render "games/join.json.jbuilder", status: :ok
     else
       render json: { messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(users: [current_user])
     if @game.save
-      render json: {game: @game}, status: :created
+      render "games/create.json.jbuilder", status: :created
     else
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     @player2 = User.find(params[:id])
     @game = Game.new(users: [current_user, @player2])
     if @game.save
-      render json: {game: @game}, status: :created
+      render "games/challenge.json.jbuilder", status: :created
     else
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
     end
