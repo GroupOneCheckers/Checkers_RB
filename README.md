@@ -226,6 +226,10 @@ example errors:
 
 `GET /games/leaderboard`
 
+{
+  "authentication_token": "YBbk7q4FRXztrskezRzi"
+  }
+
 ```json
 "users": {
   "email": "isac@abshire.org",
