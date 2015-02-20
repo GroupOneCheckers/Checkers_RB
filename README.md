@@ -263,7 +263,7 @@ allows a player to pick a move on the board, returns board with updated pieces i
 ```json
 {
 "game": {
-	"response": "valid",
+	"response": 1,
 	"id": 66,
 	"board": [ 
 				[0, 2, 0 ,2, 0, 2, 0, 2],
@@ -275,6 +275,11 @@ allows a player to pick a move on the board, returns board with updated pieces i
                 [0, 1, 0, 1, 0, 1, 0, 1],
                 [1, 0, 1, 0, 1, 0, 1, 0]
 			 ]
+	"id": 71,
+	"piece_count": {
+					"1": 8,
+					"2": 7
+					}
 		}
 }
 ```
