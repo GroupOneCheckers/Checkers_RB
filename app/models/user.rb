@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(opts={})
-    super(:only => [:email, :authentication_token, :username])
+    super(:only => [:email, :authentication_token, :username, :wins, :losses, :forfeits])
   end
 
   private
