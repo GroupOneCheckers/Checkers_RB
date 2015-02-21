@@ -30,7 +30,7 @@ class Game < ActiveRecord::Base
   end
 
   def piece_count
-    self.board.flatten.each_with_object(Hash.new(0)) do |piece,count| 
+    self.board.flatten.each_with_object(Hash.new(0)) do |piece,count|
       count[piece] += 1 unless piece == 0
     end
   end
@@ -40,6 +40,7 @@ class Game < ActiveRecord::Base
       player2.wins += 1
       player1.losses += 1
       player1.save; player2.save
+      self.finished == true; self.save
     elsif self.piece_count[2] == 0
       player1.wins += 1
       player2.losses += 1
@@ -97,10 +98,10 @@ class Game < ActiveRecord::Base
   def possible_jump(token_start, token_end)
     x1, y1 = token_start
     x2,y2 = token_end
-    x2 == x1 + 2 && board[x1+1][y1+1] == 1 || 
+    x2 == x1 + 2 && board[x1+1][y1+1] == 1 ||
     x2 == x1 + 2 && board[x1+1][y1-1] == 1 ||
-    x2 == x1 - 2 && board[x1-1][y1+1] == 2 || 
-    x2 == x1 - 2 && board[x1-1][y1-1] == 2 
+    x2 == x1 - 2 && board[x1-1][y1+1] == 2 ||
+    x2 == x1 - 2 && board[x1-1][y1-1] == 2
   end
 
   def checks_pass?(x,y)
@@ -108,7 +109,7 @@ class Game < ActiveRecord::Base
   end
 
   def valid_spot?(x,y)
-    self.board[x][y] == 0 ? true : false 
+    self.board[x][y] == 0 ? true : false
   end
 
   def check_integer(index)
@@ -134,7 +135,7 @@ class Game < ActiveRecord::Base
   def jump_if_true_move_if_valid(token_start, token_end)
     x1, y1 = token_start
     x2, y2 = token_end
-    if y2 == y1 + 1 || y2 == y1 - 1 
+    if y2 == y1 + 1 || y2 == y1 - 1
       y2
     elsif y2 == y1 + 2 || y2 == y1 - 2
       y2
