@@ -1,4 +1,4 @@
 json.game do
-  json.board @game.board
   json.id @game.id
+  json.board @game.board
 end
