@@ -2,11 +2,6 @@ class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :set_game, only: [:join, :update]
 
-  def index
-    @games = Game.all.where(finished: false).order(:piece_count desc)
-    @joinable_games = Game.all.map(&:waiting)
-  end
-
 
   def update
     board_before_move = @game.board.map(&:deep_dup)
