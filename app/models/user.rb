@@ -14,11 +14,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def as_json(opts={})
-    defaults = {:only => [:email, :username, :wins, :losses, :forfeits]}
-    defaults.merge! opts
-    super(defaults)
-  end
 
   private
   def generate_authentication_token

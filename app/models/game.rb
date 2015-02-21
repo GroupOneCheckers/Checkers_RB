@@ -6,10 +6,6 @@ class Game < ActiveRecord::Base
 
   validates_length_of :users, maximum: 2, message: "you can only have two players."
 
-    def as_json(opts={})
-      super(:only => [:id, :board])
-    end
-
   INITIAL_BOARD = [[0, 2, 0 ,2, 0, 2, 0, 2],
                    [2, 0, 2, 0, 2, 0, 2, 0],
                    [0, 2, 0, 2, 0, 2, 0, 2],
@@ -36,6 +32,18 @@ class Game < ActiveRecord::Base
   def piece_count
     self.board.flatten.each_with_object(Hash.new(0)) do |piece,count| 
       count[piece] += 1 unless piece == 0
+    end
+  end
+
+  def win?
+    if self.piece_count[1] == 0
+      player2.wins += 1
+      player1.losses += 1
+      player1.save; player2.save
+    elsif self.piece_count[2] == 0
+      player1.wins += 1
+      player2.losses += 1
+      player1.save; player2.save
     end
   end
 
