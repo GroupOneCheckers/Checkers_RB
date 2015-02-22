@@ -277,14 +277,40 @@ example errors:
 `Status: 201 CREATED`
 
 ```json
-"users": {
-  "email": "isac@abshire.org",
-  "username": "rickey_batz",
-  "authentication_token": "YBbk7q4FRXztrskezRzi",
-  "wins": 99,
-  "losses": 71,
-  "forfeits": 13
-}
+[
+	{
+	"user": {
+			"username": "sienna",
+			"email": "isobel@gaylordbogan.com",
+			"authentication_token": "LxsTttF83WXpYRhkoUAs",
+			"wins": 99,
+			"losses": 30,
+			"forfeits": 10
+			}
+		},
+	{
+	"user": {
+			"username": "grant",
+			"email": "shea_kuphal@gleichner.com",
+			"authentication_token": "azg_B4ePdZbxKFpXriwS",
+			"wins": 99,
+			"losses": 66,
+			"forfeits": 16
+			}
+		},
+	{
+	"user": {
+			"username": "armani.boyer",
+			"email": "amos@lang.biz",
+			"authentication_token": "3z5Dauk-FQ65iLf5Lot7",
+			"wins": 98,
+			"losses": 70,
+			"forfeits": 10
+		}
+	}, ...
+
+]
+
 ```
 
 
