@@ -8,4 +8,5 @@ class SessionsController < Devise::SessionsController
       render json: { :error => "Authentication Failure!" }, status: :unauthenticated
     end
   end
+
 end

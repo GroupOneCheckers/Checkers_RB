@@ -6,4 +6,5 @@ json.user do
   json.wins @user.wins
   json.losses @user.losses
   json.forfeits @user.forfeits
+  json.current_games @user.games.active
 end
