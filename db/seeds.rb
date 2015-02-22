@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-50.times do
+10.times do |n|
  User.create(
-  username: Faker::Internet.user_name,
+  username: "fake_user_#{n}",
   email: Faker::Internet.email,
   password: 'password',
   wins: rand(100),
@@ -31,25 +31,6 @@ User.all.each do |user|
                      card_number_last_four: Faker::Business.credit_card_number[-4..-1],
                      favorite_color: Faker::Commerce.color,
                      blog: Faker::Internet.url)
-end
-
-
-def random_player
-  User.find(User.pluck(:id).sample)
-end
-
-
-25.times do |x|
-  player1 = random_player
-  player2 = random_player
-  game = Game.new()
-  game.users = [player1, player2]
-  x.even? ? game.winner_id = player1.id : game.winner_id = player2.id
-  game.save
-end
-
-User.all.sample(25).each do |user|
-  Game.create(users: [user])
 end
 
 
