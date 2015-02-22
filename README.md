@@ -16,7 +16,8 @@
 ```json
 "user": {
 	"email": "spencer@aol.com",
-	"password": "SpencersKitty"
+	"password": "SpencersKitty",
+	"username": "spencerHatesCats"
 }
 ```
 <h5>response</h5>
@@ -27,11 +28,11 @@ creates a new user. returns an authentication token.
 ```json
 {
 "user": {
-		 "email": "brian@hoohkjblr.com",
-		 "username": null
+		 "email": "spencer@aol.com",
+		 "username": "spencerHatesCats"
 		}
 }
-
+```
 error examples:
 `Status: 422 unprocessable_entity`
 
@@ -84,7 +85,7 @@ allows a user to sign in.
 			 					{
 			 					"id": 83,
 			 					"players_count": 2,
-			 					"winner_id": nil,
+			 					"winner_id": "nil",
 			 					"board": [
 			 								[0, 2, 0 ,2, 0, 2, 0, 2],
                 							[2, 0, 2, 0, 2, 0, 2, 0],
@@ -101,7 +102,7 @@ allows a user to sign in.
                 				{
 			 					"id": 65,
 			 					"players_count": 2,
-			 					"winner_id": nil,
+			 					"winner_id": "nil",
 			 					"board": [
 			 								[0, 2, 0 ,2, 0, 2, 0, 2],
                 							[2, 0, 2, 0, 2, 0, 2, 0],
