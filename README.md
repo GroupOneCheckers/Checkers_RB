@@ -15,7 +15,6 @@
 
 ```json
 "user": {
-	"username": "Spencer",
 	"email": "spencer@aol.com",
 	"password": "SpencersKitty"
 }
@@ -28,12 +27,10 @@ creates a new user. returns an authentication token.
 ```json
 {
 "user": {
-	"email": "spencer@aol.com",
-	"username": "Spencer",
-	"authentication_token": "bEazx9CNyTh-3URaMge2"
-	}
+		 "email": "brian@hoohkjblr.com",
+		 "username": null
+		}
 }
-```
 
 error examples:
 `Status: 422 unprocessable_entity`
@@ -73,10 +70,52 @@ allows a user to sign in.
 
 ```json
 {
-"user": {
-	"email": "brit@gmail.com",
-	"authentication_token": "MMrgfMFPz-S14qomLdyX"
-	}
+	"user": {
+			 "username": "gwendolyn",
+			 "email": "kelli_volkman@kutch.com",
+			 "authentication_token": "dM8zPqM-gJhjGcBiuTzU",
+			 "wins": 50,
+			 "losses": 12,
+			 "forfeits": 13,
+			 "level": 0,
+			 "experience": 723,
+			 "division": "Minor",
+			 "current_games": [
+			 					{
+			 					"id": 83,
+			 					"players_count": 2,
+			 					"winner_id": nil,
+			 					"board": [
+			 								[0, 2, 0 ,2, 0, 2, 0, 2],
+                							[2, 0, 2, 0, 2, 0, 2, 0],
+                							[0, 2, 0, 2, 0, 2, 0, 2],
+                							[0, 0, 0, 0, 0, 0, 0, 0],
+                							[0, 0, 0, 0, 0, 0, 0, 0],
+                							[1, 0, 1, 0, 1, 0, 1, 0],
+                							[0, 1, 0, 1, 0, 1, 0, 1],
+                							[1, 0, 1, 0, 1, 0, 1, 0]
+                							],
+                				"finished": false
+                				},
+
+                				{
+			 					"id": 65,
+			 					"players_count": 2,
+			 					"winner_id": nil,
+			 					"board": [
+			 								[0, 2, 0 ,2, 0, 2, 0, 2],
+                							[2, 0, 2, 0, 2, 0, 2, 0],
+                							[0, 2, 0, 2, 0, 2, 0, 2],
+                							[0, 0, 0, 0, 0, 0, 0, 0],
+                							[0, 0, 0, 0, 0, 0, 0, 0],
+                							[1, 0, 1, 0, 1, 0, 1, 0],
+                							[0, 1, 0, 1, 0, 1, 0, 1],
+                							[1, 0, 1, 0, 1, 0, 1, 0]
+                							],
+                				"finished": false
+                				}
+                			]
+            }
 }
 ```
 
@@ -117,19 +156,27 @@ creates a new game. Returns the board.
 
 ```json
 {
-"game": {
-	"id": 66,
-	"board": [ 
-				[0, 2, 0 ,2, 0, 2, 0, 2],
-                [2, 0, 2, 0, 2, 0, 2, 0],
-                [0, 2, 0, 2, 0, 2, 0, 2],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 1, 0, 1, 0, 1, 0],
-                [0, 1, 0, 1, 0, 1, 0, 1],
-                [1, 0, 1, 0, 1, 0, 1, 0]
-			 ]
-		}
+  "game": {
+  "id": 124,
+  "players": [
+  			   {
+  			   "id": 184,
+  			   "user_id": 80,
+  			   "game_id": 124
+  			   }
+  		     ],
+  "finished": false,
+  "board":  [ 
+  			[0, 2, 0 ,2, 0, 2, 0, 2],
+            [2, 0, 2, 0, 2, 0, 2, 0],
+            [0, 2, 0, 2, 0, 2, 0, 2],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 1, 0, 1, 0, 1, 0],
+            [0, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 0, 1, 0]
+  		    ]
+  	    }
 }
 ```
 
@@ -216,7 +263,7 @@ example errors:
 
 <h5>Request</h5>
 
-`GET /games/leaderboard`
+`GET /leaderboard`
 
 ```json
 {

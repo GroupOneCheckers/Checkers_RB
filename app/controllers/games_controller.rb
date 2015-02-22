@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.active.sort_by(&:piece_count)
     @joinable_games = Game.waiting
-    render "games/available_and_active_games.json.jbuilder" status: :ok
+    render "games/available_and_active_games.json.jbuilder", status: :ok
   end
 
   def update
@@ -45,15 +45,6 @@ class GamesController < ApplicationController
       render "games/challenge.json.jbuilder", status: :created
     else
       render json: {messages: @game.errors.full_messages}, status: :unprocessable_entity
-    end
-  end
-
-  def leaderboard
-    @users = User.all.order('users.wins DESC').first(25)
-    if @users
-      render "games/leaderboard.json.jbuilder", status: :created
-    else
-      render json: { messages: @users.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
