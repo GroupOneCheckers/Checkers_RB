@@ -2,12 +2,18 @@ class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :set_game, only: [:join, :update]
 
+  def index
+    @games = Game.active.sort_by(&:piece_count)
+    @joinable_games = Game.waiting
+    render "games/available_and_active_games.json.jbuilder" status: :ok
+  end
 
   def update
     board_before_move = @game.board.map(&:deep_dup)
     @game.pick_move(current_user, token_start_params, token_end_params)
-    binding.pry
-    if @game.board != board_before_move
+    if @game.win?
+      render "games/finished.json.jbuilder", status: :ok
+    elsif @game.board != board_before_move
       render "games/update_valid.json.jbuilder", status: :ok
     else
       render "games/update_invalid.json.jbuilder", status: :not_acceptable

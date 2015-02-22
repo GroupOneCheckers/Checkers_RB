@@ -40,10 +40,12 @@ class Game < ActiveRecord::Base
       player2.wins += 1
       player1.losses += 1
       player1.save; player2.save
+      self.finished = true; self.save
     elsif self.piece_count[2] == 0
       player1.wins += 1
       player2.losses += 1
       player1.save; player2.save
+      self.finished = true; self.save
     end
   end
 
