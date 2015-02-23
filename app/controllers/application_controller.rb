@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  Warden::Manager.after_authentication do |user,auth,opts|
+    user.last_seen = Time.now
+    user.save
+  end
+
   rescue_from ActiveRecord::RecordNotFound do
     render json: nil, status: :not_found
   end
@@ -27,5 +32,10 @@ class ApplicationController < ActionController::Base
   private
   def set_format!
     params[:format] = 'json'
+  end
+
+  def update_last_seen
+    current_user.last_seen = Time.now
+    current_user.save
   end
 end

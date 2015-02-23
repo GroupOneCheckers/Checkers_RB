@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'users/:id/games', to: 'games#challenge', as: :challenge_player
   resources :games, except: [:new, :edit, :show]
   get '/leaderboard', to: 'users#leaderboard', as: :leaderboard, controller: 'users'
+  get '/users/online', to: 'users#users_online', as: :users_online, controller: 'users'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

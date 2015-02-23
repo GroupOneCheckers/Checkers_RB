@@ -63,7 +63,6 @@ class GamesController < ApplicationController
   end
 
   def token_end_params
-    binding.pry
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
   end
