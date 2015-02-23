@@ -10,7 +10,10 @@ class GamesController < ApplicationController
 
   def update
     board_before_move = @game.board.map(&:deep_dup)
-    @game.pick_move(current_user, token_start_params, token_end_params)
+    token_end_params.flatten.count == 2 ? 
+    token_moves = [token_start_params] + [token_end_params] : 
+    token_moves = [token_start_params] + token_end_params
+    @game.pick_move(current_user, token_moves)
     if @game.win?
       render "games/finished.json.jbuilder", status: :ok
     elsif @game.board != board_before_move
@@ -62,5 +65,10 @@ class GamesController < ApplicationController
   def token_end_params
     token_end = params.require(:pick).permit(:token_end)
     JSON.parse(token_end['token_end'])
+  end
+
+  def token_path_params
+    token_path = params.require(:pick).permit(:token_path)
+    moves = JSON.parse(token_path['token_path'])
   end
 end
