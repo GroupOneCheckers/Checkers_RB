@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :players
   has_many :games, through: :players
 
+  def self.return_online_users
+    User.where("last_seen > ?",5.minutes.ago.to_s(:db))
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -22,5 +26,7 @@ class User < ActiveRecord::Base
       break token unless User.where(authentication_token: token).first
     end
   end
+
+
 end
 

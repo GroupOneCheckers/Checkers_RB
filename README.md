@@ -158,16 +158,16 @@ creates a new game. Returns the board.
 ```json
 {
   "game": {
-  "id": 124,
-  "players": [
-  			   {
+  	"id": 124,
+  	"players": [
+  			{
   			   "id": 184,
   			   "user_id": 80,
   			   "game_id": 124
-  			   }
-  		     ],
-  "finished": false,
-  "board":  [
+  			}
+  	    ],
+  	"finished": false,
+  	"board":  [
   			[0, 2, 0 ,2, 0, 2, 0, 2],
             [2, 0, 2, 0, 2, 0, 2, 0],
             [0, 2, 0, 2, 0, 2, 0, 2],
@@ -201,9 +201,22 @@ allows a user to join a game in waiting. Returns the board.
 
 ```json
 {
-"game": {
-	"id": 66,
-	"board": [
+	"game": {
+		"id": 1,
+		"players": [
+			{
+				"game_id": 1,
+				"id": 1,
+				"user_id": 2
+			},
+			{
+				"id": 4,
+				"user_id": 21,
+				"game_id": 1
+			}
+		],
+		"finished": false,
+		"board": [
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
@@ -242,19 +255,19 @@ example errors:
 {
 "game": {
 	"id": 66,
-  "players": [
-           {
+  	"players": [
+        {
            "id": 67,
            "user_id": 18,
            "game_id": 65
-           },
-           {
+        },
+        {
            "id": 68,
            "user_id": 1,
            "game_id": 65
-           }
-           ],
-  "finished": false,
+        }
+    ],
+  	"finished": false,
 	"board": [
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
@@ -300,7 +313,7 @@ example errors:
 			"losses": 30,
 			"forfeits": 10
 			}
-		},
+	},
 	{
 	"user": {
 			"username": "grant",
@@ -310,7 +323,7 @@ example errors:
 			"losses": 66,
 			"forfeits": 16
 			}
-		},
+	},
 	{
 	"user": {
 			"username": "armani.boyer",
@@ -319,7 +332,7 @@ example errors:
 			"wins": 98,
 			"losses": 70,
 			"forfeits": 10
-		}
+			}
 	}
 
 ]
@@ -352,8 +365,8 @@ allows a player to pick a move on the board, returns board with updated pieces i
 "game": {
 	"valid_move": 1,
 	"id": 66,
-  "finished": false,
-  "piece_count": {
+  	"finished": false,
+  	"piece_count": {
           "1": 8,
           "2": 7
           },
@@ -405,10 +418,10 @@ example errors:
 ```json
 {
 	"game": {
-	"valid_move": 1,
-	"id": 3,
-	"finished": false,
-	"piece_count": {
+		"valid_move": 1,
+		"id": 3,
+		"finished": false,
+		"piece_count": {
 				"1": 12,
 				"2": 10
 				},
@@ -425,3 +438,61 @@ example errors:
 
 			}
 }
+
+<h2>Return users currently online</h2>
+
+<h5>Request</h5>
+
+`GET /users/online`
+`"authentication_token": "CjsyXUPfxM3Ta3qtBBxd"`
+
+returns a list of users that have made a request (been authenticated) in the last 5 minutes.
+
+<h5>Response</h5>
+
+```json
+[
+	{
+	"user": {
+		"username": "fake_user_2",
+		"email": "meggie@hodkiewicz.com",
+		"authentication_token": "eSdF3Sx_t9SyS6VKNTHc",
+		"wins": 61,
+		"losses": 52,
+		"level": 1,
+		"forfeits": 3,
+		"experience": 716,
+		"division": "Minor",
+		"last_seen": "2015-02-23T19:37:38.304Z"
+		}
+	},
+	{
+	"user": {
+		"username": "fake_user_9",
+		"email": "astrid.paucek@mcclureoconnell.com",
+		"authentication_token": "cX9ZhpkJ4k6ZYZfnMudy",
+		"wins": 69,
+		"losses": 91,
+		"level": 3,
+		"forfeits": 14,
+		"experience": 293,
+		"division": "Minor",
+		"last_seen": "2015-02-23T19:37:21.775Z"
+		}
+	},
+	{
+	"user": {
+		"username": "Will16",
+		"email": "will16@aol.com",
+		"authentication_token": "-oxrVrxUE4taywthTcHR",
+		"wins": 0,
+		"losses": 0,
+		"level": 1,
+		"forfeits": 0,
+		"experience": 0,
+		"division": null,
+		"last_seen": "2015-02-23T19:36:49.143Z"
+		}
+	}
+]
+```

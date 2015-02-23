@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218193253) do
+ActiveRecord::Schema.define(version: 20150223061915) do
 
   create_table "games", force: :cascade do |t|
     t.integer "players_count"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150218193253) do
     t.integer  "level",                  default: 1
     t.integer  "experience",             default: 0
     t.string   "division"
+    t.datetime "last_seen"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
