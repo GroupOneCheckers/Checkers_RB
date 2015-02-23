@@ -167,7 +167,7 @@ creates a new game. Returns the board.
   			   }
   		     ],
   "finished": false,
-  "board":  [ 
+  "board":  [
   			[0, 2, 0 ,2, 0, 2, 0, 2],
             [2, 0, 2, 0, 2, 0, 2, 0],
             [0, 2, 0, 2, 0, 2, 0, 2],
@@ -203,7 +203,7 @@ allows a user to join a game in waiting. Returns the board.
 {
 "game": {
 	"id": 66,
-	"board": [ 
+	"board": [
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
@@ -220,7 +220,7 @@ allows a user to join a game in waiting. Returns the board.
 example errors:
 `Status: 422 Unprocessable Entity`
 
-<h2>Challange a Player</h2> 
+<h2>Challenge a Player</h2>
 
 <h5>Request</h5>
 
@@ -232,17 +232,30 @@ example errors:
 }
 ```
 
-`:id` is the user_id of the player being challanged, you must send the `authentication_token` of the user that is challeging another user. This allows a user to challange another user. Returns the board.
+`:id` is the user_id of the player being challenged, you must send the `authentication_token` of the user that is challenging another user. This allows a user to challenge another user. Returns the board.
 
 <h5>Response</h5>
 
-`Status: 200 OK`
+`Status: 201 Created`
 
 ```json
 {
 "game": {
 	"id": 66,
-	"board": [ 
+  "players": [
+           {
+           "id": 67,
+           "user_id": 18,
+           "game_id": 65
+           },
+           {
+           "id": 68,
+           "user_id": 1,
+           "game_id": 65
+           }
+           ],
+  "finished": false,
+	"board": [
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
@@ -307,14 +320,14 @@ example errors:
 			"losses": 70,
 			"forfeits": 10
 		}
-	}, ...
+	}
 
 ]
 
 ```
 
 
-<h2>pick a move on the board</h2>
+<h2>Pick a Move on the Board</h2>
 
 <h5>Request</h5>
 
@@ -332,14 +345,19 @@ allows a player to pick a move on the board, returns board with updated pieces i
 
 <h5>Response</h5>
 
-`Status: 201 Created`
+`Status: 200 OK`
 
 ```json
 {
 "game": {
-	"response": 1,
+	"valid_move": 1,
 	"id": 66,
-	"board": [ 
+  "finished": false,
+  "piece_count": {
+          "1": 8,
+          "2": 7
+          },
+	"board": [
 				[0, 2, 0 ,2, 0, 2, 0, 2],
                 [2, 0, 2, 0, 2, 0, 2, 0],
                 [0, 2, 0, 2, 0, 2, 0, 2],
@@ -349,15 +367,9 @@ allows a player to pick a move on the board, returns board with updated pieces i
                 [0, 1, 0, 1, 0, 1, 0, 1],
                 [1, 0, 1, 0, 1, 0, 1, 0]
 			 ]
-	"id": 71,
-	"piece_count": {
-					"1": 8,
-					"2": 7
-					}
 		}
 }
 ```
-
 
 example errors:
 `Status: 422 Unprocessable Entity`
