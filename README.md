@@ -375,4 +375,53 @@ example errors:
 `Status: 422 Unprocessable Entity`
 
 
+`player making multiple moves`
+<p>if the game board looks like:  </p>
 
+```json
+ [[0, 2, 0, 2, 0, 2, 0, 2],
+  [2, 0, 2, 0, 2, 0, 0, 0],
+  [0, 2, 0, 2, 0, 2, 0, 2],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 2, 0, 0, 0, 0],
+  [1, 0, 1, 0, 1, 0, 1, 0],
+  [0, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0]]
+```
+<p> you can send multiple moves in the token_end param using comma seperators. At the moment, you have to surround the moves in an array, we are working on making this easier to implement. <strong>this move involves player 1 jumping two pieces</strong></p>
+
+<h5>request</h5>
+
+```json
+"authentication_token": "mc7LqfF-X3LoU2sxLzM5"
+"pick": {
+	"token_start": "[5,2]",
+	"token_end": "[[3,4],[1,6]]"
+}
+```
+
+
+<h5>response</h5>
+```json
+{
+	"game": {
+	"valid_move": 1,
+	"id": 3,
+	"finished": false,
+	"piece_count": {
+				"1": 12,
+				"2": 10
+				},
+		"board":[ 
+				[0, 2, 0, 2, 0, 2, 0, 2],
+				[2, 0, 2, 0, 2, 0, 1, 0],
+				[0, 2, 0, 2, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0],
+				[1, 0, 0, 0, 1, 0, 1, 0],
+				[0, 1, 0, 1, 0, 1, 0, 1],
+				[1, 0, 1, 0, 1, 0, 1, 0]
+				]
+
+			}
+}
