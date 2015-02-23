@@ -38,4 +38,5 @@ class ApplicationController < ActionController::Base
     current_user.last_seen = Time.now
     current_user.save
   end
+
 end
