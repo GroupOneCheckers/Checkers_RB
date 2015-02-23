@@ -375,7 +375,7 @@ example errors:
 `Status: 422 Unprocessable Entity`
 
 
-`player making multiple moves`
+<h3>player making multiple moves</h3>
 <p>if the game board looks like:  </p>
 
 ```json
