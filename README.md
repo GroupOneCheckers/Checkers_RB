@@ -438,6 +438,7 @@ example errors:
 
 			}
 }
+```
 
 <h2>Return users currently online</h2>
 
