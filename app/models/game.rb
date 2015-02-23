@@ -49,154 +49,143 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def pick_move(user, token_start, token_end)
-    x1, y1 = token_start
-    if player1 == user && self.board[x1][y1] == 1
-      x2 = xBottomCheck(token_start, token_end)
-      y2 = yBottomCheck(token_start, token_end)
-      if checks_pass?(x2,y2)
-        update_board(token_start,token_end,1)
+  def pick_move(user, token_moves)
+    move_count = token_moves.count - 2
+    token_moves[0..move_count].each_with_index do |row_col, i|
+      start_row, start_col = row_col[0], row_col[1]
+      end_row, end_col = token_moves[i+1][0], token_moves[i+1][1]
+      if player1 == user && self.board[start_row][start_col] == 1
+        end_row_check = xBottomCheck(start_row, start_col, end_row, end_col)
+        end_col_check = yBottomCheck(start_row, start_col, end_row, end_col)
+        if checks_pass?(end_row_check, end_col_check)
+          update_board(user, start_row, start_col, end_row, end_col,1)
+        end
+      elsif player2 == user && self.board[start_row][start_col] == 2
+        end_row_check = xTopCheck(start_row, start_col, end_row, end_col)
+        end_col_check = yTopCheck(start_row, start_col, end_row, end_col)
+        if checks_pass?(end_row_check, end_col_check)
+          update_board(user, start_row, start_col, end_row, end_col,2)
+        end
+      else
+        move_error
       end
-    elsif player2 == user && self.board[x1][y1] == 2
-      x2 = xTopCheck(token_start, token_end)
-      y2 = yTopCheck(token_start, token_end)
-      if checks_pass?(x2,y2)
-        update_board(token_start,token_end,2)
-      end
-    else
-      move_error
     end
   end
 
-  def update_board(token_start,token_end, player)
-    start_row, start_col = token_start
-    pick_row, pick_col = token_end
+  def update_board(user, start_row, start_col, end_row, end_col, player)
     self.board[start_row][start_col] = 0
-    self.board[pick_row][pick_col] = player
-    remove_opponent_token(token_start, token_end) if jumped(start_row, pick_row)
+    self.board[end_row][end_col] = player
+    remove_opponent_token(user, start_row, start_col, end_col) if jumped(start_row, end_row)
     self.save
   end
 
-  def remove_opponent_token(token_start, token_end)
-    start_row, start_col = token_start
-    pick_row, pick_col = token_end
-    self.board[start_row + 1][start_col - 1] = 0 if pick_col == start_col - 2
-    self.board[start_row + 1][start_col + 1] = 0 if pick_col == start_col + 2
-    self.board[start_row - 1][start_col - 1] = 0 if pick_col == start_col - 2
-    self.board[start_row - 1][start_col + 1] = 0 if pick_col == start_col + 2
+  def remove_opponent_token(user, start_row, start_col, end_col)
+    if player2 == user
+      self.board[start_row + 1][start_col - 1] = 0 if end_col == start_col - 2
+      self.board[start_row + 1][start_col + 1] = 0 if end_col == start_col + 2
+    elsif player1 == user
+      self.board[start_row - 1][start_col - 1] = 0 if end_col == start_col - 2
+      self.board[start_row - 1][start_col + 1] = 0 if end_col == start_col + 2
+    end
   end
 
-  def jumped(start_row, pick_row)
-    if start_row == pick_row - 2
+  def jumped(start_row, end_row)
+    if start_row == end_row - 2
       true
-    elsif start_row == pick_row + 2
+    elsif start_row == end_row + 2
       true
     else
       false
     end
   end
 
-  def possible_jump(token_start, token_end)
-    x1, y1 = token_start
-    x2,y2 = token_end
-    x2 == x1 + 2 && board[x1+1][y1+1] == 1 ||
-    x2 == x1 + 2 && board[x1+1][y1-1] == 1 ||
-    x2 == x1 - 2 && board[x1-1][y1+1] == 2 ||
-    x2 == x1 - 2 && board[x1-1][y1-1] == 2
+  def possible_jump(start_row, start_col, end_row)
+    end_row == start_row + 2 && board[start_row+1][start_col+1] == 1 ||
+    end_row == start_row + 2 && board[start_row+1][start_col-1] == 1 ||
+    end_row == start_row - 2 && board[start_row-1][start_col+1] == 2 ||
+    end_row == start_row - 2 && board[start_row-1][start_col-1] == 2
   end
 
-  def checks_pass?(x,y)
-    check_integer(x) && check_integer(y) && valid_spot?(x,y)
+  def checks_pass?(end_row, end_col)
+    check_integer(end_col) && check_integer(end_col) && valid_spot?(end_row, end_col)
   end
 
-  def valid_spot?(x,y)
-    self.board[x][y] == 0 ? true : false
+  def valid_spot?(end_row, end_col)
+    self.board[end_row][end_col] == 0 ? true : false
   end
 
   def check_integer(index)
     index.is_a?(Integer)
   end
 
-  def end_col_jump_if_true_move_if_valid(token_start, token_end, col_position)
-    x1, y1 = token_start
-    x2, y2 = token_end
-    col_position == 0 ? move = (y1 + 1) : move = (y1 - 1)
-    col_position == 0 ? jump = (y1 + 2) : jump = (y1 - 2)
-    if x2 == xTopCheck(token_start,token_end) && y2 == move ||
-       x2 == xBottomCheck(token_start, token_end) && y2 == move
-      y2
-    elsif x2 == xTopCheck(token_start,token_end) && y2 == jump ||
-          x2 == xBottomCheck(token_start, token_end) && y2 == jump
-      y2
+  def first_or_last_col_jump_if_true_move_if_valid(start_row, start_col, end_row, end_col, col_position)
+    col_position == 0 ? move = (start_col + 1) : move = (start_col - 1)
+    col_position == 0 ? jump = (start_col + 2) : jump = (start_col - 2)
+    if end_row == xTopCheck(start_row, start_col, end_row, end_col) && end_col == move ||
+       end_row == xBottomCheck(start_row, start_col, end_row, end_col) && end_col == move
+      end_col
+    elsif end_row == xTopCheck(start_row, start_col, end_row, end_col) && end_col == jump ||
+          end_row == xBottomCheck(start_row, start_col, end_row, end_col) && end_col == jump
+      end_col
     else
       nil
     end
   end
 
-  def jump_if_true_move_if_valid(token_start, token_end)
-    x1, y1 = token_start
-    x2, y2 = token_end
-    if y2 == y1 + 1 || y2 == y1 - 1
-      y2
-    elsif y2 == y1 + 2 || y2 == y1 - 2
-      y2
+  def jump_if_true_move_if_valid(start_col, end_col)
+    if end_col == start_col + 1 || end_col == start_col - 1
+      end_col
+    elsif end_col == start_col + 2 || end_col == start_col - 2
+      end_col
     else
       nil
     end
   end
 
-  def xTopCheck(token_start, token_end)
-    x1, y1 = token_start
-    x2, y2 = token_end
-    if x1 > x2 #must move down the board
+  def xTopCheck(start_row, start_col, end_row, end_col)
+    if start_row > end_row #must move down the board
       nil
-    elsif possible_jump(token_start,token_end) #checks if player might be jumping
-      x2
-    elsif x2 > x1 + 1 #cant move more than one space up the board
+    elsif possible_jump(start_row, start_col, end_row) #checks if player might be jumping
+      end_row
+    elsif end_row > start_row + 1 #cant move more than one space up the board
       nil
     else #valid move
-      x2
+      end_row
     end
   end
 
-  def yTopCheck(token_start, token_end)
-    x1, y1 = token_start
-    x2, y2 = token_end
-    if y1 == 0 #if in column 0, can only move down and to the right
-      end_col_jump_if_true_move_if_valid(token_start, token_end, 0)
-    elsif y1 == 7 #if in column 7, can only move down and to the left
-      end_col_jump_if_true_move_if_valid(token_start, token_end, 7)
-    elsif xTopCheck(token_start, token_end)
-      jump_if_true_move_if_valid(token_start,token_end) #can only move down and to the right or left
-    else y2 > y1 + 1 || y2 < y1 - 1 #can only move down one space
-      nil
+  def yTopCheck(start_row, start_col, end_row, end_col)
+    if start_col == 0 #if in column 0, can only move down and to the right
+      first_or_last_col_jump_if_true_move_if_valid(start_row, start_col, end_row, end_col, 0) 
+    elsif start_col == 7 #if in column 7, can only move down and to the left
+      first_or_last_col_jump_if_true_move_if_valid(start_row, start_col, end_row, end_col, 7) 
+    elsif xTopCheck(start_row, start_col, end_row, end_col) #can only move down and to the right or left
+      jump_if_true_move_if_valid(start_col, end_col) 
+    else end_col > start_col + 1 || end_col < start_col - 1 #can only move down one space
+      nil 
     end
   end
 
-  def xBottomCheck(token_start, token_end)
-    x1 = token_start[0]
-    x2 = token_end[0]
-    if x1 < x2 #must move up board
+  def xBottomCheck(start_row, start_col, end_row, end_col)
+    if start_row < end_row #must move up board
       nil
-    elsif possible_jump(token_start, token_end) #checks if player might be jumping
-      x2
-    elsif x2 > x1 - 1 #cant move more than one space up the board
+    elsif possible_jump(start_row, start_col, end_row) #checks if player might be jumping
+      end_row
+    elsif end_row < start_row - 1 #cant move more than one space up the board
       nil
     else #valid move
-      x2
+      end_row
     end
   end
 
-  def yBottomCheck(token_start, token_end)
-    x1, y1 = token_start
-    x2, y2 = token_end
-    if y1 == 0 #if in column 0, can only move up and to the right or jump
-      end_col_jump_if_true_move_if_valid(token_start, token_end, 0)
-    elsif y1 == 7 #if in column 7, can only move up and to the left or jump
-      end_col_jump_if_true_move_if_valid(token_start, token_end, 7)
-    elsif xBottomCheck(token_start, token_end) #can only move up and to the right or left or jump
-      jump_if_true_move_if_valid(token_start,token_end)
-    else y2 > y1 + 1 || y2 < y1 - 1 #can only move up one space
+  def yBottomCheck(start_row, start_col, end_row, end_col)
+    if start_col == 0 #if in column 0, can only move up and to the right or jump
+      first_or_last_col_jump_if_true_move_if_valid(start_row, start_col, end_row, end_col, 0)
+    elsif start_col == 7 #if in column 7, can only move up and to the left or jump
+      first_or_last_col_jump_if_true_move_if_valid(start_row, start_col, end_row, end_col, 7)
+    elsif xBottomCheck(start_row, start_col, end_row, end_col) #can only move up and to the right or left or jump
+      jump_if_true_move_if_valid(start_col, end_col)
+    else end_col > start_col + 1 || end_col < start_col - 1 #can only move up one space
       nil
     end
   end
@@ -208,3 +197,5 @@ class Game < ActiveRecord::Base
     "you cant move there"
   end
 end
+
+
