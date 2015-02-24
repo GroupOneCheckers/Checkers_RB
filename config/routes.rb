@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                                       :sessions => "sessions" }
 
   post '/games/:id', to: 'games#join', as: :join_game
-  post 'users/:id/games', to: 'games#challenge', as: :challenge_player
+  post '/users/:id/games', to: 'games#challenge', as: :challenge_player
   resources :games, except: [:new, :edit, :show]
   get '/leaderboard', to: 'users#leaderboard', as: :leaderboard, controller: 'users'
   get '/users/online', to: 'users#users_online', as: :users_online, controller: 'users'
